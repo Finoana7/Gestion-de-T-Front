@@ -48,7 +48,7 @@ function NewFamily() {
     return (
         <div className="flex gap-4 w-full">
             <form onSubmit={submit} className="flex flex-col justify-between w-[50%] h-full bg-white rounded-lg p-4">
-                <Input name="name" value={`${me?.name}'family${String(Math.random()).split('').reverse().join('').slice(0, 4)}`} placeholder="Your family name" required />
+                <Input name="name" defaultValue={`${me?.name}'family${String(Math.random()).split('').reverse().join('').slice(0, 4)}`} placeholder="Your family name" required />
                 <label htmlFor="fileFm" className="text-center w-full text-sky-800 text-sm font-bold cursor-pointer">
                     photo <span className="ml-2 text-lg">📸</span>
                 </label>

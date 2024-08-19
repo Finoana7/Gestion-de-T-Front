@@ -12,8 +12,8 @@ function Message() {
                 <span>🤪😆🥰</span>
             </div>
             {
-                me?.family.map(fm => (
-                    fm.message.length !== 0 ?
+                me?.family?.map(fm => (
+                    fm.message && fm.message?.length !== 0 ?
                         <Link to={`/family/${fm.message[0]?.family.id}`} className="message" key={fm.id} title={fm.message[0]?.family.name}>
                             <div className="profile-pic">
                                 <img src={fm.message[0]?.user?.photo || '/nest.png'} />
