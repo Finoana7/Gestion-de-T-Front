@@ -1,19 +1,9 @@
 import axios from 'axios'
-import { api as _, token } from '../constant'
-import { FamilyFull } from '../store/family'
-const api = _ + '/user'
-
-export type FamilyLite = {
-    id: string
-    name: string
-    photo: string
-}
+import { api, token } from '../constant'
 
 export type User = {
     id: string
     name: string
-    photo: string | null
-    family: FamilyFull[]
 }
 
 export type Auth = {
@@ -27,7 +17,7 @@ export async function login(data: Auth) {
 }
 
 export async function signup(data: Auth) {
-    const res = await axios.post(`${api}/signup`, data)
+    const res = await axios.post(`${api}/register`, data)
     return res.data
 }
 
