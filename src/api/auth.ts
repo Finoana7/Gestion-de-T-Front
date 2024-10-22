@@ -12,17 +12,17 @@ export type Auth = {
 }
 
 export async function login(data: Auth) {
-    const res = await axios.post(`${api}/login`, data)
+    const res = await axios.post(`${api}/user/login`, data)
     return res.data
 }
 
 export async function signup(data: Auth) {
-    const res = await axios.post(`${api}/register`, data)
+    const res = await axios.post(`${api}/user/register`, data)
     return res.data
 }
 
 export async function auth() {
-    const res = await axios.get(`${api}`, {
+    const res = await axios.get(`${api}/user/`, {
         headers: {
             "Authorization": token()
         }

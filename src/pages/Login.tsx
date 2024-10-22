@@ -15,8 +15,8 @@ function Login() {
         }
 
         await login(data)
-        .then(({token}: {token: string}) => {
-            sessionStorage.setItem('token', token)
+        .then(({Token}: {Token: string}) => {
+            localStorage.setItem('token', Token)
             nav('/')
         })
         .catch(() => alert('something wrong 😰'))
