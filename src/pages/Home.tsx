@@ -1,10 +1,14 @@
-import { user_store } from '../store/user'
+import Header from "../components/Header";
+import Layout from "../components/Layout";
 
 export default function Home() {
-    const {data: user} = user_store()
+
   return (
-    <h1>
-      {JSON.stringify(user)}
-    </h1>
+    <div className="flex flex-col w-full h-full bg-neutral-200">
+      <Header/>
+      <main className="border flex w-full h-full p-3">
+        <Layout/>
+      </main>
+    </div>
   )
 }

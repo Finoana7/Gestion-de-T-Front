@@ -16,11 +16,6 @@ export async function login(data: Auth) {
     return res.data
 }
 
-export async function signup(data: Auth) {
-    const res = await axios.post(`${api}/user/register`, data)
-    return res.data
-}
-
 export async function auth() {
     const res = await axios.get(`${api}/user/`, {
         headers: {
