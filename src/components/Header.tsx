@@ -1,6 +1,6 @@
 function Header() {
   return (
-    <header className="w-full h-max p-3">
+    <header className="w-full h-max p-3 pb-2">
       <div className="flex justify-between w-full h-max bg-white p-3 rounded-2xl shadow-lg">
         <div className="flex items-center justify-center gap-2">
           <i className="text-2xl -translate-y-2">🏍️</i>
