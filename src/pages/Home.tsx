@@ -50,7 +50,7 @@ export default function Home() {
                   return <Depense />;
                 case "recette":
                   return <Recette />;
-                case "historic":
+                case "":
                   return <Historic />;
                 default:
                   return <></>;
