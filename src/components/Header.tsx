@@ -18,9 +18,9 @@ function Header() {
         </div>
 
         <div className="flex items-center gap-3">
-          <button onClick={logout} title="logout" className="w-5 h-5 rounded-full border shadow-lg bg-emerald-400 hover:scale-75 cursor-pointer"></button>
-          <button onClick={logout} className="w-5 h-5 rounded-full border shadow-lg bg-indigo-400 hover:scale-75 cursor-pointer"></button>
-          <button onClick={logout} className="w-5 h-5 rounded-full bg-orange-400 hover:scale-75 cursor-pointer"></button>
+          <button onClick={logout} title="logout" className="w-5 h-5 rounded-full border shadow-lg bg-emerald-400 hover:scale-75 cursor-pointer transition-all"></button>
+          <button onClick={logout} title="logout" className="w-5 h-5 rounded-full border shadow-lg bg-indigo-400 hover:scale-75 cursor-pointer transition-all"></button>
+          <button onClick={logout} title="logout" className="w-5 h-5 rounded-full bg-orange-400 hover:scale-75 cursor-pointer transition-all"></button>
         </div>
       </div>
     </header>

@@ -24,15 +24,15 @@ function Historic() {
             </div>
           </div>
           {archive?.map((arch) => (
-            <div key={arch.id} className="flex gap-1 w-full min-w-[20rem]">
+            <div key={arch?.id} className="flex gap-1 w-full min-w-[20rem]">
               <div className="text-center border w-[30%] p-2 overflow-auto text-nowrap rounded-lg transition-all bg-white">
-                {arch.amount} ar
+                {arch?.amount} ar
               </div>
               <div className="text-center border w-[40%] p-2 overflow-auto text-nowrap rounded-lg transition-all bg-white">
-                {arch.label}
+                {arch?.label}
               </div>
               <div className="text-center border w-[30%] p-2 overflow-auto text-nowrap rounded-lg transition-all bg-white">
-                {arch.date}
+                {arch?.date}
               </div>
             </div>
           ))}
