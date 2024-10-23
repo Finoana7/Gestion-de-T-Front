@@ -1,7 +1,6 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Header from "../components/Header";
 import Layout from "../components/Layout";
-import { useEffect } from "react";
 import Historic from "./Historic";
 import Depense from "./Depense";
 import Recette from "./Recette";
@@ -9,12 +8,6 @@ import { Toaster } from "react-hot-toast";
 
 export default function Home() {
   const { tab } = useParams<{ tab: "historic" | "depense" | "recette" | "" }>();
-  const nav = useNavigate();
-  console.log(tab);
-
-  useEffect(() => {
-    nav("/historic");
-  }, [tab]);
 
   return (
     <div className="flex flex-col w-full h-full bg-neutral-200">
