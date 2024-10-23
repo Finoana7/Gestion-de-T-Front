@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom"
-import useLogout from "../hook/useLogout"
+import useHandleSession from "../hook/useLogout"
 import { Auth, login } from "../api/auth"
 
 function Login() {
-    useLogout()
+    useHandleSession()
     const nav = useNavigate()
 
     const submit = async (e: React.FormEvent<HTMLFormElement>) => {
