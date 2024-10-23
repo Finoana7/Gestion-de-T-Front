@@ -10,13 +10,3 @@ export async function recetter(data: {label: string, amount: number}) {
 
     return res.data
 }
-
-export async function historicRecette() {
-    const res = await axios.get(`${api}/recette`, {
-        headers: {
-            "Authorization": token()
-        }
-    })
-
-    return res.data
-}

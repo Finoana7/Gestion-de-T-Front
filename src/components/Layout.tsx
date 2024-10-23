@@ -17,7 +17,7 @@ export default function Layout({ children }: Props) {
 
         </div>
       </div>
-      <div className="flex-grow h-full rounded-xl shadow-lg border">{children}</div>
+      <div className="flex-grow h-full p-2 rounded-xl shadow-lg border">{children}</div>
     </div>
   );
 }

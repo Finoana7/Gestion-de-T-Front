@@ -1,8 +1,9 @@
 import toast from "react-hot-toast";
 import { recetter } from "../api/recette";
-import { useSold } from "../hook/data";
+import { useRecette, useSold } from "../hook/data";
 
 function Recette() {
+  const { data: archive, reFetch: reFetchRecette } = useRecette();
   const { reFetch } = useSold();
 
   const submit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -17,10 +18,11 @@ function Recette() {
     await recetter(data)
       .then(() => {
         reFetch();
+        reFetchRecette();
         toast.success("Success 💸");
       })
       .catch((err) => {
-        toast.error(err.response.data)
+        toast.error(err.response.data);
       })
       .finally(() => {
         (e.target as EventTarget & HTMLFormElement).reset();
@@ -54,6 +56,35 @@ function Recette() {
           Submit
         </button>
       </form>
+
+      <div className="w-full h-max overflow-x-auto">
+        <div className="flex flex-col gap-1 w-full h-max overflow-auto">
+          <div className="flex gap-1 w-full min-w-[20rem]">
+            <div className="text-center border w-[30%] p-2 text-white bg-green-400 rounded">
+              Amount
+            </div>
+            <div className="text-center border w-[40%] p-2 text-white bg-green-400 rounded">
+              Libelé
+            </div>
+            <div className="text-center border w-[30%] p-2 text-white bg-green-400 rounded">
+              Date
+            </div>
+          </div>
+          {archive?.map((arch) => (
+            <div key={arch.id} className="flex gap-1 w-full min-w-[20rem]">
+              <div className="text-center border w-[30%] p-2 overflow-auto text-nowrap rounded-lg transition-all bg-white">
+                {arch.amount} ar
+              </div>
+              <div className="text-center border w-[40%] p-2 overflow-auto text-nowrap rounded-lg transition-all bg-white">
+                {arch.label}
+              </div>
+              <div className="text-center border w-[30%] p-2 overflow-auto text-nowrap rounded-lg transition-all bg-white">
+                {arch.date}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
