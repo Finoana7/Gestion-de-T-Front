@@ -2,21 +2,27 @@ import { FaArrowLeft, FaUserPlus } from "react-icons/fa";
 import { useProfiles, useRole } from "../hook/data";
 import { Link, useNavigate } from "react-router-dom";
 import AddProfile from "./AddProfile";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
+import { user_store } from "../store/user";
+import { User } from "../api/auth";
+import useQuery from "../hook/useQuery";
+import { AiFillCloseCircle } from "react-icons/ai";
 
-function Profiles() {
+export default function Profiles() {
   const role = useRole();
   const { data: users } = useProfiles();
+  const { data: me } = user_store();
 
   const nav = useNavigate();
 
   useEffect(() => {
-    role === "admin" ? null : nav("/")
+    role === "admin" ? null : nav("/");
   }, []);
 
   return (
     <div className="flex flex-col gap-3 w-full h-max mt-3">
       <AddProfile />
+      <Profile users={users} />
       <div className="flex justify-between gap-3">
         <div className="flex items-center gap-4">
           <Link to="/historic">
@@ -29,14 +35,15 @@ function Profiles() {
           className="flex items-center gap-2 w-max font-bold text-indigo-600 bg-white px-4 py-1 rounded-xl border shadow"
         >
           <FaUserPlus />
-          Add
+          Ajouter
         </button>
       </div>
       <div className="flex flex-wrap gap-3 w-full">
         {users?.map((user) => (
-          <div
-            key={user.Id}
-            className="flex justify-start items-center gap-4 w-max h-max border p-2 pr-6 rounded-lg inset-0 backdrop-blur-md bg-white/70"
+          <Link
+            to={me?.ID !== user.ID ? `?id=${user.ID}` : "?"}
+            key={user.ID}
+            className="flex justify-start items-center gap-4 w-max h-max border p-2 pr-6 rounded-lg inset-0 backdrop-blur-md bg-white/70 transition-all hover:scale-105"
           >
             <img
               src={`/nest.jpg`}
@@ -45,28 +52,69 @@ function Profiles() {
             />
             <div className="flex flex-col gap-1 justify-between font-bold">
               <h2>{user?.Name}</h2>
-              <div className={`text-xs text-white w-max h-max py-[1px] px-[3px] rounded ${
-                (() => {
+              <div
+                className={`text-xs text-white w-max h-max py-[1px] px-[3px] rounded ${(() => {
                   switch (user?.Role) {
                     case "admin":
-                      return "bg-emerald-500/80"
+                      return "bg-emerald-500/80";
                     case "editeur":
-                      return "bg-indigo-500/80"
+                      return "bg-indigo-500/80";
                     case "observateur":
-                      return "bg-orange-500/80"
+                      return "bg-orange-500/80";
                     default:
                       break;
                   }
-                })()
-              }`}>
+                })()}`}
+              >
                 {user?.Role}
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
   );
 }
 
-export default Profiles;
+function Profile({ users }: { users: User[] }) {
+  const id = useQuery("id");
+
+  if (!id) {
+    return <></>;
+  }
+
+  const nav = useNavigate();
+
+  const user = useMemo(() => {
+    return users?.find((usr) => usr.ID === id);
+  }, [id]);
+
+  return (
+    <div className="absolute z-50 flex items-center justify-center w-screen h-screen inset-0 backdrop-blur-[2px] bg-black/50">
+      <div className="flex flex-col items-center px-4 py-3 gap-10 w-[25rem] bg-white rounded-xl">
+        <button className="w-max" title="fermer" onClick={() => nav("?")}>
+          <AiFillCloseCircle className="w-5 h-5" />
+        </button>
+        <div className="flex justify-start items-start gap-4 w-full border p-2 rounded-xl shadow">
+          <img
+            src={`/nest.jpg`}
+            alt=""
+            className="bg-white w-14 h-14 rounded-full shadow border border-neutral-300"
+          />
+          <div className="flex flex-col gap-2 justify-between">
+            <h1 className="text-xl text-center">{user?.Role.toUpperCase()}</h1>
+            <h2>{user?.Name}</h2>
+          </div>
+        </div>
+        <div className="flex flex-col gap-2 w-full">
+          <Link to="?" className="text-center w-full font-bold text-indigo-600 bg-white px-4 py-2 rounded-xl border shadow">
+            retour
+          </Link>
+          <button className="w-full font-bold bg-red-500 text-white px-4 py-2 rounded-xl border shadow">
+            supprimer
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
