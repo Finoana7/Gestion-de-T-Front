@@ -8,7 +8,7 @@ type Props = React.PropsWithChildren;
 
 export default function Layout({ children }: Props) {
   const { data: sold } = useSold();
-  const role = useRole()
+  const role = useRole();
 
   const nav = useNavigate();
 
@@ -23,13 +23,17 @@ export default function Layout({ children }: Props) {
             <div className="text-2xl font-mono">{JSON.stringify(sold)} Ar</div>
           </div>
           <div className="flex flex-col gap-3 w-full h-max">
-            <button
-              onClick={() => nav("/profiles")}
-              className="font-bold text-indigo-600 bg-white px-4 py-2 rounded-xl border shadow hover:shadow-lg transition-all"
-            >
-              <FaUsers className="mr-3 inline -translate-y-1" />
-              Tous les profiles
-            </button>
+            {
+              role === "admin" ?
+              <button
+                onClick={() => nav("/profiles")}
+                className="font-bold text-indigo-600 bg-white px-4 py-2 rounded-xl border shadow hover:shadow-lg transition-all"
+              >
+                <FaUsers className="mr-3 inline -translate-y-1" />
+                Tous les profiles
+              </button>
+              : null
+            }
           </div>
         </div>
       </div>
