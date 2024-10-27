@@ -23,12 +23,13 @@ function Depense() {
         toast.success("Success 💸");
       })
       .catch((err) => {
-        toast.error(err.response.data);
+        toast.error(err.response?.data);
       })
       .finally(() => {
         (e.target as EventTarget & HTMLFormElement).reset();
       });
   };
+  
 
   return (
     <div className="flex flex-col gap-3 w-full h-max mt-3">
@@ -72,7 +73,7 @@ function Depense() {
             </div>
           </div>
           {depense?.map((arch) => (
-            <div key={arch.id} className="flex gap-1 w-full min-w-[20rem]">
+            <div key={arch.Id} className="flex gap-1 w-full min-w-[20rem]">
               <div className="text-center border w-[30%] p-2 overflow-auto text-nowrap rounded-lg transition-all bg-white">
                 {arch.amount} ar
               </div>

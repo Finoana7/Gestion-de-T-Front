@@ -13,7 +13,7 @@ function Header() {
     <header className="w-full h-max p-3 pb-2">
       <div className="flex justify-between w-full h-max bg-white p-3 rounded-2xl shadow-lg">
         <div className="flex items-center justify-center gap-2">
-          <i className="text-2xl -translate-y-2">🏍️</i>
+          <i className="text-2xl -translate-y-1">💰</i>
           <h1 className='font-bold font-mono italic text-xl tag'>App</h1>
         </div>
 

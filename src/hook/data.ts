@@ -23,7 +23,7 @@ export function useRecette() {
 }
 
 export function useDepense() {
-    const {data, reFetch} = useFetch<Recette[]>(`${api}/trans`, {
+    const {data, reFetch} = useFetch<Recette[]>(`${api}/depense`, {
         headers: {
             "Authorization": token()
         }

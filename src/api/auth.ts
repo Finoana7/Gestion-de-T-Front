@@ -2,8 +2,9 @@ import axios from 'axios'
 import { api, token } from '../constant'
 
 export type User = {
-    id: string
-    name: string
+    Id: string
+    Name: string
+    Role: "admin" | "editeur" | "observateur"
 }
 
 export type Auth = {

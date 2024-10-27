@@ -1,5 +1,5 @@
 export type Recette = {
-  id: string
+  Id: string
   date: string
   label: string
   amount: number
