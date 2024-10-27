@@ -2,6 +2,7 @@ import useFetch from "http-react"
 import { api, token } from "../constant"
 import { Recette } from "../types/recette"
 import { User } from "../api/auth"
+import { user_store } from "../store/user"
 
 export function useSold() {
     const {data, reFetch} = useFetch<number>(`${api}/sold`, {
@@ -41,4 +42,10 @@ export function useProfiles(){
     })
 
     return {data, reFetch}
+}
+
+export function useRole(){
+    const {data: user} = user_store()
+
+    return user?.Role
 }

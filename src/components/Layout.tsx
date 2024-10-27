@@ -1,5 +1,5 @@
 import React from "react";
-import { useSold } from "../hook/data";
+import { useRole, useSold } from "../hook/data";
 import Profile from "./Profile";
 import { useNavigate } from "react-router-dom";
 import { FaUsers } from "react-icons/fa";
@@ -8,6 +8,7 @@ type Props = React.PropsWithChildren;
 
 export default function Layout({ children }: Props) {
   const { data: sold } = useSold();
+  const role = useRole()
 
   const nav = useNavigate();
 
