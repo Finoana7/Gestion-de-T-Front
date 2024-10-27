@@ -10,3 +10,16 @@ export async function createUser(data: {name: string, role: string, password: st
 
     return res.data
 }
+
+export async function deleteUser(id: string) {
+    const res = await axios.delete(`${api}/user/`, {
+        headers: {
+            "Authorization": token()
+        },
+        params: {
+            id
+        }
+    })
+
+    return res.data
+}
