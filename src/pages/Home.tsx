@@ -5,14 +5,12 @@ import Historic from "./Historic";
 import Depense from "./Depense";
 import Recette from "./Recette";
 import { Toaster } from "react-hot-toast";
-import AllProfiles from "../components/AllProfiles";
+import Profiles from "../components/Profiles";
 
 export default function Home() {
   const { tab = "" } = useParams<{
     tab: "historic" | "depense" | "recette" | "profiles" | "";
   }>();
-
-  console.log(tab);
 
   return (
     <div className="flex flex-col w-full h-full bg-neutral-200">
@@ -20,44 +18,52 @@ export default function Home() {
       <Header />
       <main className="border flex w-full h-full p-3">
         <Layout>
-          <nav className="flex gap-3 justify-between w-full">
-            <div className="flex gap-3">
-              <Link
-                to={"/historic"}
-                className={`text-lg px-4 py-1 rounded-xl ${
-                  tab === "historic" || tab === ""
-                    ? "text-white bg-indigo-500"
-                    : "bg-white"
-                }`}
-              >
-                Historique
-              </Link>
-              <Link
-                to={"/depense"}
-                className={`text-lg px-4 py-1 rounded-xl ${
-                  tab === "depense" ? "text-white bg-indigo-500" : "bg-white"
-                }`}
-              >
-                Depense
-              </Link>
-              <Link
-                to={"/recette"}
-                className={`text-lg px-4 py-1 rounded-xl ${
-                  tab === "recette" ? "text-white bg-indigo-500" : "bg-white"
-                }`}
-              >
-                Recette
-              </Link>
-            </div>
-            <Link
+          {
+            tab !== "profiles" ?
+            <nav className="flex gap-3 justify-between w-full">
+              <div className="flex gap-3">
+                <Link
+                  to={"/historic"}
+                  className={`px-4 py-2 flex items-center text-sm font-bold rounded-xl ${
+                    tab === "historic" || tab === ""
+                      ? "text-white bg-indigo-500"
+                      : "bg-white/50 inset-0 backdrop-blur-sm border border-white"
+                  }`}
+                >
+                  Historique
+                </Link>
+                <Link
+                  to={"/depense"}
+                  className={`px-4 py-2 flex items-center rounded-xl text-sm font-bold ${
+                    tab === "depense"
+                      ? "text-white bg-indigo-500"
+                      : "bg-white/50 inset-0 backdrop-blur-sm border border-white"
+                  }`}
+                >
+                  Depense
+                </Link>
+                <Link
+                  to={"/recette"}
+                  className={`px-4 py-2 flex items-center rounded-xl text-sm font-bold ${
+                    tab === "recette"
+                      ? "text-white bg-indigo-500"
+                      : "bg-white/50 inset-0 backdrop-blur-sm border border-white"
+                  }`}
+                >
+                  Recette
+                </Link>
+              </div>
+              {/* <Link
                 to={"/profiles"}
-                className={`text-lg px-4 py-1 rounded-xl ${
-                  tab === "profiles" ? "text-white bg-indigo-500" : "bg-white"
+                className={`flex items-center w-8 h-8 p-2 rounded-full text-sm inset-0 backdrop-blur-sm border border-white ${
+                  tab === "profiles" ? "text-indigo-500 bg-white" : "bg-white/30"
                 }`}
               >
-                Profiles
-              </Link>
-          </nav>
+                <FaUsers className="w-full h-full"/>
+              </Link> */}
+            </nav>
+            : null
+          }
           <div className="w-full h-max">
             {(() => {
               switch (tab) {
@@ -70,7 +76,7 @@ export default function Home() {
                 case "":
                   return <Historic />;
                 case "profiles":
-                  return <AllProfiles />;
+                  return <Profiles />;
                 default:
                   return <></>;
               }
