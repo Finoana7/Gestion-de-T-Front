@@ -9,7 +9,7 @@ function Profile() {
         <img
           src={`/nest.jpg`}
           alt=""
-          className="bg-white w-16 h-16 rounded-full shadow border border-neutral-300"
+          className="bg-white w-14 h-14 rounded-full shadow border border-neutral-300"
         />
         <div className="flex flex-col gap-2 justify-between">
           <h1 className="text-xl text-center">{user?.Role.toUpperCase()}</h1>

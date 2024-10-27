@@ -5,12 +5,14 @@ import Historic from "./Historic";
 import Depense from "./Depense";
 import Recette from "./Recette";
 import { Toaster } from "react-hot-toast";
+import AllProfiles from "../components/AllProfiles";
 
 export default function Home() {
-  const { tab = "" } = useParams<{ tab: "historic" | "depense" | "recette" | "" }>();
+  const { tab = "" } = useParams<{
+    tab: "historic" | "depense" | "recette" | "profiles" | "";
+  }>();
 
   console.log(tab);
-  
 
   return (
     <div className="flex flex-col w-full h-full bg-neutral-200">
@@ -18,31 +20,43 @@ export default function Home() {
       <Header />
       <main className="border flex w-full h-full p-3">
         <Layout>
-          <nav className="flex gap-3">
+          <nav className="flex gap-3 justify-between w-full">
+            <div className="flex gap-3">
+              <Link
+                to={"/historic"}
+                className={`text-lg px-4 py-1 rounded-xl ${
+                  tab === "historic" || tab === ""
+                    ? "text-white bg-indigo-500"
+                    : "bg-white"
+                }`}
+              >
+                Historique
+              </Link>
+              <Link
+                to={"/depense"}
+                className={`text-lg px-4 py-1 rounded-xl ${
+                  tab === "depense" ? "text-white bg-indigo-500" : "bg-white"
+                }`}
+              >
+                Depense
+              </Link>
+              <Link
+                to={"/recette"}
+                className={`text-lg px-4 py-1 rounded-xl ${
+                  tab === "recette" ? "text-white bg-indigo-500" : "bg-white"
+                }`}
+              >
+                Recette
+              </Link>
+            </div>
             <Link
-              to={"/historic"}
-              className={`text-lg px-4 py-2 rounded-xl ${
-                tab === "historic" || tab === "" ? "text-white bg-indigo-500" : "bg-white"
-              }`}
-            >
-              Historique
-            </Link>
-            <Link
-              to={"/depense"}
-              className={`text-lg px-4 py-2 rounded-xl ${
-                tab === "depense" ? "text-white bg-indigo-500" : "bg-white"
-              }`}
-            >
-              Depense
-            </Link>
-            <Link
-              to={"/recette"}
-              className={`text-lg px-4 py-2 rounded-xl ${
-                tab === "recette" ? "text-white bg-indigo-500" : "bg-white"
-              }`}
-            >
-              Recette
-            </Link>
+                to={"/profiles"}
+                className={`text-lg px-4 py-1 rounded-xl ${
+                  tab === "profiles" ? "text-white bg-indigo-500" : "bg-white"
+                }`}
+              >
+                Profiles
+              </Link>
           </nav>
           <div className="w-full h-max">
             {(() => {
@@ -55,8 +69,10 @@ export default function Home() {
                   return <Recette />;
                 case "":
                   return <Historic />;
+                case "profiles":
+                  return <AllProfiles />;
                 default:
-                  return <></>
+                  return <></>;
               }
             })()}
           </div>

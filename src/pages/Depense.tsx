@@ -62,13 +62,13 @@ function Depense() {
       <div className="w-full h-max overflow-x-auto">
         <div className="flex flex-col gap-1 w-full h-max overflow-auto">
           <div className="flex gap-1 w-full min-w-[20rem]">
-            <div className="text-center border w-[30%] p-2 text-white bg-green-400 rounded">
+            <div className="text-center w-[30%] p-2 text-white bg-green-400 rounded">
               Amount
             </div>
-            <div className="text-center border w-[40%] p-2 text-white bg-green-400 rounded">
+            <div className="text-center w-[40%] p-2 text-white bg-green-400 rounded">
               Libelé
             </div>
-            <div className="text-center border w-[30%] p-2 text-white bg-green-400 rounded">
+            <div className="text-center w-[30%] p-2 text-white bg-green-400 rounded">
               Date
             </div>
           </div>
