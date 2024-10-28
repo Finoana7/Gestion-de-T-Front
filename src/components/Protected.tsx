@@ -13,7 +13,12 @@ function Protected({ children }: PropsWithChildren) {
             .then((res) => {
                 user.update(res)
             })
-            .catch(() => nav('/login'))
+            .catch(() => {
+                if (localStorage.getItem("token")) {
+                    localStorage.removeItem("token")
+                }
+                nav('/login')
+            })
     }, [])
 
     return (

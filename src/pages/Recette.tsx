@@ -1,10 +1,12 @@
 import toast from "react-hot-toast";
 import { recetter } from "../api/recette";
 import { useRecette, useSold } from "../hook/data";
+import { user_store } from "../store/user";
 
 function Recette() {
   const { data: archive, reFetch: reFetchRecette } = useRecette();
   const { reFetch } = useSold();
+  const {data: user} = user_store()
 
   const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,31 +33,35 @@ function Recette() {
 
   return (
     <div className="flex flex-col gap-3 w-full h-max mt-3">
-      <form
-        onSubmit={submit}
-        action=""
-        className="flex flex-col justify-between gap-5 px-3 py-5 w-full bg-white rounded"
-      >
-        <div className="flex justify-between gap-5 w-full">
-          <input
-            type="number"
-            name="amount"
-            className="w-[60%] outline-none rounded"
-            placeholder="Amount Ar"
-            required
-          />
-          <input
-            type="text"
-            name="label"
-            className="w-full outline-none rounded"
-            placeholder="Libelé"
-            required
-          />
-        </div>
-        <button className="w-max font-bold text-indigo-600 bg-white px-4 py-2 rounded-xl border shadow">
-          Submit
-        </button>
-      </form>
+      {
+        user?.Role !== "observateur" ?
+        <form
+          onSubmit={submit}
+          action=""
+          className="flex flex-col justify-between gap-5 px-3 py-5 w-full bg-white rounded"
+        >
+          <div className="flex justify-between gap-5 w-full">
+            <input
+              type="number"
+              name="amount"
+              className="w-[60%] outline-none rounded"
+              placeholder="Amount Ar"
+              required
+            />
+            <input
+              type="text"
+              name="label"
+              className="w-full outline-none rounded"
+              placeholder="Libelé"
+              required
+            />
+          </div>
+          <button className="w-max font-bold text-indigo-600 bg-white px-4 py-2 rounded-xl border shadow">
+            Submit
+          </button>
+        </form>
+        : null
+      }
 
       <div className="w-full h-max overflow-x-auto">
         <div className="flex flex-col gap-1 w-full h-max overflow-auto">

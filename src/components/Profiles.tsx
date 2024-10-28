@@ -7,10 +7,12 @@ import { user_store } from "../store/user";
 import { User } from "../api/auth";
 import useQuery from "../hook/useQuery";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { deleteUser } from "../api/user";
+import toast from "react-hot-toast";
 
 export default function Profiles() {
   const role = useRole();
-  const { data: users } = useProfiles();
+  const { data: users, reFetch } = useProfiles();
   const { data: me } = user_store();
 
   const nav = useNavigate();
@@ -22,7 +24,7 @@ export default function Profiles() {
   return (
     <div className="flex flex-col gap-3 w-full h-max mt-3">
       <AddProfile />
-      <Profile users={users} />
+      <Profile users={users} reFetch={reFetch}/>
       <div className="flex justify-between gap-3">
         <div className="flex items-center gap-4">
           <Link to="/historic">
@@ -76,7 +78,7 @@ export default function Profiles() {
   );
 }
 
-function Profile({ users }: { users: User[] }) {
+function Profile({ users, reFetch }: { users: User[], reFetch: () => Promise<void> }) {
   const id = useQuery("id");
 
   if (!id) {
@@ -89,12 +91,21 @@ function Profile({ users }: { users: User[] }) {
     return users?.find((usr) => usr.ID === id);
   }, [id]);
 
+  const deleting = async () => {
+    await deleteUser(id)
+    .then(() => {
+      toast.success("success !")
+      reFetch()
+      nav("?")
+    })
+    .catch((err) => {
+      toast.error(err.response?.message)
+    })
+  }
+
   return (
     <div className="absolute z-50 flex items-center justify-center w-screen h-screen inset-0 backdrop-blur-[2px] bg-black/50">
       <div className="flex flex-col items-center px-4 py-3 gap-10 w-[25rem] bg-white rounded-xl">
-        <button className="w-max" title="fermer" onClick={() => nav("?")}>
-          <AiFillCloseCircle className="w-5 h-5" />
-        </button>
         <div className="flex justify-start items-start gap-4 w-full border p-2 rounded-xl shadow">
           <img
             src={`/nest.jpg`}
@@ -107,10 +118,10 @@ function Profile({ users }: { users: User[] }) {
           </div>
         </div>
         <div className="flex flex-col gap-2 w-full">
-          <Link to="?" className="text-center w-full font-bold text-indigo-600 bg-white px-4 py-2 rounded-xl border shadow">
+          <button onClick={() => nav("?")} className="w-full font-bold text-indigo-600 bg-white px-4 py-2 rounded-xl border">
             retour
-          </Link>
-          <button className="w-full font-bold bg-red-500 text-white px-4 py-2 rounded-xl border shadow">
+          </button>
+          <button onClick={deleting} className="w-full font-bold bg-red-500 text-white px-4 py-2 rounded-xl">
             supprimer
           </button>
         </div>
