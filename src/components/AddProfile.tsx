@@ -5,10 +5,12 @@ import { createUser } from "../api/user";
 import toast from "react-hot-toast";
 import {AiFillCloseCircle} from "react-icons/ai"
 import { useNavigate } from "react-router-dom";
+import { image } from "../utils/image";
 
 function AddProfile() {
 
   const nav = useNavigate()
+  const [img, setImg] = useState<string>("/nest.jpg")
 
   const [resp, setRes] = useState<{
     name: string;
@@ -47,7 +49,7 @@ function AddProfile() {
       <div className="absolute z-50 flex items-center justify-center w-screen h-screen inset-0 backdrop-blur-[2px] bg-black/70">
         <div className="flex flex-col items-center px-4 py-7 gap-8 w-[25rem] bg-white rounded-xl">
           <img
-            src={`/nest.jpg`}
+            src={img === "/nest.jpg" ? img : image(img)}
             alt=""
             className="bg-white w-20 h-20 rounded-full shadow border border-neutral-300"
           />
@@ -56,7 +58,7 @@ function AddProfile() {
             action=""
             className="flex flex-col gap-3 w-full"
           >
-            <Input placeholder="Name" name="name" required />
+            <Input placeholder="Name" name="name" required onChange={(e) => setImg(e.currentTarget.value)}/>
             <Select defaultValue="editeur" name="role" required>
               <Option value="admin">Admin</Option>
               <Option value="editeur">Editeur</Option>

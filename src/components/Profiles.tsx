@@ -6,9 +6,9 @@ import { useEffect, useMemo } from "react";
 import { user_store } from "../store/user";
 import { User } from "../api/auth";
 import useQuery from "../hook/useQuery";
-import { AiFillCloseCircle } from "react-icons/ai";
 import { deleteUser } from "../api/user";
 import toast from "react-hot-toast";
+import { image } from "../utils/image";
 
 export default function Profiles() {
   const role = useRole();
@@ -48,7 +48,7 @@ export default function Profiles() {
             className="flex justify-start items-center gap-4 w-max h-max border p-2 pr-6 rounded-lg inset-0 backdrop-blur-md bg-white/70 transition-all hover:scale-105"
           >
             <img
-              src={`/nest.jpg`}
+              src={image(user?.Name)}
               alt=""
               className="bg-white w-12 h-12 rounded-full shadow border border-neutral-300"
             />
@@ -108,7 +108,7 @@ function Profile({ users, reFetch }: { users: User[], reFetch: () => Promise<voi
       <div className="flex flex-col items-center px-4 py-3 gap-10 w-[25rem] bg-white rounded-xl">
         <div className="flex justify-start items-start gap-4 w-full border p-2 rounded-xl shadow">
           <img
-            src={`/nest.jpg`}
+            src={image(user?.Name)}
             alt=""
             className="bg-white w-14 h-14 rounded-full shadow border border-neutral-300"
           />
